@@ -13,7 +13,7 @@ import java.util.*;
 public class HuffmanCode {
 
 	public static void main(String[] args) {
-		String str = "i like like like java do you like a java";
+		String str = "i like like like java do you like a java  ";
 		byte[] bytes = str.getBytes();
 		System.out.println(Arrays.toString(bytes));
 		byte[] huffmanBytes = huffmanZip(bytes);
