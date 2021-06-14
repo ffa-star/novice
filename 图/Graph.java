@@ -2,6 +2,7 @@ package 图;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 
 public class Graph {
 
@@ -9,6 +10,7 @@ public class Graph {
 	private int[][] edges; // 存储图对应的邻接矩阵
 	private int numOfEdges; // 表示边的数目
 	private boolean[] isVisited; // 记录某个节点是否被访问
+	LinkedList queue = null;
 
 	public static void main(String[] args) {
 		int n = 5; // 节点的个数
@@ -25,7 +27,8 @@ public class Graph {
 		g1.insertEdge(1, 2, 1); // B-C
 		g1.insertEdge(1, 3, 1); // B-D
 		g1.insertEdge(1, 4, 1); // B-E
-		g1.dfs();
+//		g1.dfs();
+		g1.bfs();
 
 	}
 
@@ -34,6 +37,7 @@ public class Graph {
 		vertexList = new ArrayList<>();
 		numOfEdges = 0; // 变数为0
 		isVisited = new boolean[n];
+		queue = new LinkedList();
 	}
 
 	// 得到第一个邻接节点的下标
@@ -127,7 +131,7 @@ public class Graph {
 				//如果这个节点没有访问过
 				dfs(isVisited,next);
 			}
-			//得到除了这个next节点的下一个节点
+			//如果访问过了，得到除了这个next节点的下一个节点
 			next = getNext(i,next);
 		}
 	}
@@ -141,12 +145,47 @@ public class Graph {
 		}
 	}
 	
-	
-	public void bfs() {
+	//对一个节点进行广度优先搜索的方法
+	private void bfs(boolean[] isVisited, int i) {
+		int u;  //表示队列的头节点对应的下标
+		int w;  //邻接节点w
+		//队列，记录节点访问的顺序
 		
+		//访问结点
+		System.out.println(getValueByIndex(i)+"->");
+		//表为已访问
+		isVisited[i] = true;
+		//将节点加入队列
+		queue.addLast(i);
+		while(!queue.isEmpty()) {
+			//取出队列的头节点下标
+			u = (Integer)queue.removeFirst();
+			//得到第一个邻接节点的下标w
+			w = getFirst(i);
+			while(w!=-1) {
+				//找到了，判断是否访问过
+				if(!isVisited[w]) {
+					System.out.println(getValueByIndex(w)+"->");
+					isVisited[w] = true;
+					//入队
+					queue.addLast(w);
+				}
+				//，以u为前驱，找w后面的一个节点
+				//这里和深度不一样了，深度应该是以w，找w后面一个了
+				w = getNext(u,w);
+			}
+		}
 	}
 	
 	
+	//对所有的节点进行广度优先搜索
+	public void bfs() {
+		for(int i = 0; i < getNumOfVertex();i++) {
+			if(!isVisited[i]) {
+				bfs(isVisited,i);
+			}
+		}
+	}
 	
 	
 	

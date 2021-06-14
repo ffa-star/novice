@@ -29,7 +29,7 @@ public class BinarySearch {
 
 	}
 
-	// 找到所有的数的索引
+// 找到所有的数的索引
 //	在找到mid索引值，先向左扫描得到所有的下标，加入到集合ArrayList中
 //	再向右扫描，得到所有的下标并加入到集合中
 //	返回集合
@@ -45,7 +45,7 @@ public class BinarySearch {
 		} else if (findVal < midVal) {
 			return binarySearchAll(arr, left, mid - 1, findVal);
 		} else {
-
+			//找到了
 			ArrayList list = new ArrayList<Integer>();
 			int temp = mid - 1;
 			while (true) {
