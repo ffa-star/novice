@@ -3,7 +3,7 @@ package 实际问题;
 public class Queue8 {
 
 //	定义一个max，表示共有多少个皇后
-	int max = 8;
+	int max = 4;
 //	定义数组array，保存皇后放置位置的结果，比如 arr = {0,4,7,5,2,6,1,3}
 	int[] array = new int[max];
 	static int count = 0;  //计算有多少种算符
@@ -47,7 +47,7 @@ public class Queue8 {
 	private boolean judge(int n) {
 		for (int i = 0; i < n; i++) {
 			// 说明
-//			1.  因此数组存放的值是列，
+//			1.  因此数组存放的值是列，所以不需要判断行
 //			array[i] == array[n]表示判断n和前面的n-1个皇后是否在同一列上。
 //			Math.abs(n-i) == Math.abs(array[n] - array[i] 判断是否在同一斜线上
 //			行可以看做是x, 列是y 同一斜线就是 y = x; 这里看的是斜率。
@@ -64,7 +64,7 @@ public class Queue8 {
 		count++;
 		for (int i = 0; i < array.length; i++) {
 			System.out.print(array[i] + " ");
-
+			
 		}
 		System.out.println();
 	}
