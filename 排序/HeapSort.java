@@ -57,5 +57,77 @@ public class HeapSort {
 		//当for循环结束后，已经将以i为父节点的树的最大值，放在了最顶上。
 		arr[i] = temp;  //将temp值放到调整后的位置
 	}
+	 
+	public static void heapSort1(int[] arr) {
+		if(arr == null || arr.length < 2) {
+			return ;
+		}
+		//把数组全部弄成大根堆   第一种方式
+		for(int i = 0; i < arr.length; i++) {
+			heapInsert(arr,i);
+		}
+		
+		//第二种方式，从最下面开始，每一个节点都变成大根堆。
+//		for(int i = arr.length-1; i > 0; i--) {
+//			heapify(arr,i,arr.length);
+//		}
+		
+		
+		int heapSize = arr.length-1;
+		swap(arr,0,heapSize--);
+		//0的位置的数和堆最后一个位置的数交换。
+		while(heapSize > 0) {
+			heapify(arr,0,heapSize);
+			swap(arr,0,heapSize--);
+		}
+	}
+	
+	
+	//插入堆数据的时候插到合适的位置。和他的父节点进行交换
+	public static void heapInsert(int[] arr, int index) {
+		while(arr[index] > arr[(index-1)/2]) {  //如果index=0，此时arr[(index-1)/2 = 0，也停止了。
+			//当这个数大于他父节点的数，两个进行交换
+			swap(arr,index,(index-1)/2);
+			index = (index-1)/2;
+		}
+	}
+
+	private static void swap(int[] arr, int index, int i) {
+		int temp = arr[index];
+		arr[index] = arr[i];
+		arr[i] = temp;
+		
+	}
+	
+	/**
+	 * 	将堆的顶部元素不是最大值，并重新构造堆结构
+	 * @param arr
+	 * @param index   从哪个位置开始往下
+	 * @param heapSize  堆的大小
+	 */
+	public static void heapify(int[] arr, int index, int heapSize) {
+		int left = index*2+1;  //左孩子的下标
+		while(left < heapSize){
+			//下面还有（左）孩子。
+			//两个孩子中，谁的值大，把下标给largest
+			int largest = left+1 < heapSize && arr[left+1] > arr[left]?left+1:left;
+			//left+1是右孩子的下标。如果右孩子有，  谁的值大，就把下标给largest。
+			
+			//父和较大孩子之间，谁的值大，把下标给largest
+			largest = arr[largest] > arr[index] ? largest : index;
+			
+			//说明这个父节点即使最大值
+			if(largest == index) {
+				break;
+			}
+			
+			//把较大的孩子和父做交换
+			swap(arr,largest,index);
+			//这时候index往下走，继续判断。
+			index = largest;
+			left = index * 2 + 1;
+		}
+		
+	}
 
 }

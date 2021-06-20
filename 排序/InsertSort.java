@@ -36,5 +36,22 @@ public class InsertSort {
 
 	}
 	
+	public void insertSort2(int[] arr) {
+		for(int i = 1; i < arr.length; i++) {
+			int insertIndex = i-1, insertVal = arr[i];
+			while(insertIndex >=0 && insertVal < arr[insertIndex]) {
+				arr[insertIndex+1] = arr[insertIndex];
+				insertIndex--;
+			}
+			if(insertIndex != i-1) {
+				arr[insertIndex+1] = insertVal;
+			}
+			
+		}
+		
+		
+		
+	}
+	
 
 }

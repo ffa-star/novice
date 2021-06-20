@@ -75,7 +75,7 @@ public class Greedy {
 				HashSet<String> areas = broadcasts.get(key);
 				//得到的比如说：k1  北京 上海 天津
 				tempSet.addAll(areas);
-				//求出tempSet 和 allAreas 集合的交集，交集会赋给tempSet
+				//求出tempSet 和 allAreas 集合的交集，交集会赋给tempSet。也就是去掉已经添加过的城市。此时allares里面已经去掉了已经添加过的城市了。
 				tempSet.retainAll(allAreas);
 				
 				//如果当前集合包含的未覆盖地区的数量，比maxKey指向的集合未覆盖地区还多，maxKey赋值为key

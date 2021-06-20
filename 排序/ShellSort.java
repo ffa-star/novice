@@ -49,6 +49,12 @@ public class ShellSort {
 		}
 	}
 	
+	public static void shellSort2(int[] arr) {
+		
+	}
+	
+	
+	
 	
 
 }
